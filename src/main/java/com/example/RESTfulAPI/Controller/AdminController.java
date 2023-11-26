@@ -20,24 +20,14 @@ public class AdminController {
         return "Admin level access";
     }
 
-    @GetMapping
-    public String selectAllUsers(){
-        List<ApplicationUser> users = userService.selectAllUsers();
-        String response = "Namnen på alla users är: ";
-        for (ApplicationUser user : users){
-            response += user.getUsername() + ", ";
-        } return response;
+    @PutMapping("/{id}")
+    public String updateUser(@PathVariable Long id, @RequestBody ApplicationUser updatedUser){
+        ApplicationUser updatedUserResult = userService.updateUser(id, updatedUser);
+        return updatedUserResult != null ? "Användaren har uppdaterats." : "Användaren hittades inte.";
     }
-
-    @GetMapping("/{id}")
-    public String selectOneUserById(@PathVariable Long id){
-        Optional<ApplicationUser> userOptional = userService.selectOneUserById(id);
-        return userOptional.map(user -> String.format("Användaren %s har ID %d", user.getUsername(),user.getUserId())).orElse("Användaren hittades inte.");
-    }
-
-    @PostMapping
-    public String insertUser(@RequestBody ApplicationUser user){
-        ApplicationUser insertedUser = userService.insertUser(user);
-        return String.format("Användaren %s skapad med ID %d", insertedUser.getUsername(), insertedUser.getUserId());
+    @DeleteMapping("/{id}")
+    public String deleteUser(@PathVariable Long id){
+        userService.deleteUser(id);
+        return String.format("Användaren med ID %d har raderats.", id);
     }
 }

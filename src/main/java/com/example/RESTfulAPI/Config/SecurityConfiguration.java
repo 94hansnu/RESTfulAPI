@@ -61,9 +61,7 @@ public class SecurityConfiguration {
                     auth.anyRequest().authenticated();
                 });
 
-       // http.oauth2ResourceServer()
-             //   .jwt()
-             //   .jwtAuthenticationConverter(jwtAuthenticationConverter());
+
         http.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
         http.sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

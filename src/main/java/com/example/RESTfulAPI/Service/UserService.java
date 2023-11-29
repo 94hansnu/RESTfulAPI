@@ -1,6 +1,7 @@
 package com.example.RESTfulAPI.Service;
 
 import com.example.RESTfulAPI.Entity.ApplicationUser;
+import com.example.RESTfulAPI.Repository.BookRepository;
 import com.example.RESTfulAPI.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,9 @@ public class UserService implements UserDetailsService {
     private PasswordEncoder encoder;
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BookRepository bookRepository;
 
 
     // hämta alla User

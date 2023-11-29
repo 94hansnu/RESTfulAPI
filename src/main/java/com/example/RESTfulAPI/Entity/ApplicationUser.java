@@ -16,10 +16,15 @@ public class ApplicationUser implements UserDetails {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
 
     private Integer userId;
+
+    // Unik kolumn för användarnamn
     @Column(unique=true)
     private String username;
+
+    // Lösenord för användaren
     private String password;
 
+    // Många-till-många-relation med Roll (Role)
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(
             name="user_role_junction",
@@ -28,12 +33,13 @@ public class ApplicationUser implements UserDetails {
     )
     private Set<Role> authorities;
 
+    // Standardkonstruktor som initierar en tom uppsättning av roller
     public ApplicationUser() {
         super();
         authorities = new HashSet<>();
     }
 
-
+    // Konstruktor med parametrar för att skapa en användare med specifika egenskaper
     public ApplicationUser(Integer userId, String username, String password, Set<Role> authorities) {
         super();
         this.userId = userId;
@@ -42,6 +48,7 @@ public class ApplicationUser implements UserDetails {
         this.authorities = authorities;
     }
 
+    //Getter och setter
     public Integer getUserId() {
         return this.userId;
     }
@@ -54,15 +61,14 @@ public class ApplicationUser implements UserDetails {
         this.authorities = authorities;
     }
 
+    // Metod från UserDetails för att hämta användarens roller
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
         return this.authorities;
     }
-
+    // Metod från UserDetails för att hämta användarens lösenord
     @Override
     public String getPassword() {
-        // TODO Auto-generated method stub
         return this.password;
     }
 
@@ -70,9 +76,9 @@ public class ApplicationUser implements UserDetails {
         this.password = password;
     }
 
+    // Metod från UserDetails för att hämta användarens användarnamn
     @Override
     public String getUsername() {
-        // TODO Auto-generated method stub
         return this.username;
     }
 
@@ -80,28 +86,25 @@ public class ApplicationUser implements UserDetails {
         this.username = username;
     }
 
-    /* If you want account locking capabilities create variables and ways to set them for the methods below */
+
+    // Följande fyra metoder från UserDetails används för att hantera användarens konto-status
     @Override
     public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isEnabled() {
-        // TODO Auto-generated method stub
         return true;
     }
 

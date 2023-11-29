@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
-//@Table(name="roles")
 public class Role implements GrantedAuthority {
 
     @Id
@@ -13,6 +12,7 @@ public class Role implements GrantedAuthority {
     @Column(name="role_id")
     private Integer roleId;
 
+    // behörighet för rollen
     private String authority;
 
     public Role(){
@@ -28,12 +28,13 @@ public class Role implements GrantedAuthority {
         this.authority = authority;
     }
 
+    // Metod från GrantedAuthority för att hämta rollens behörighet
     @Override
     public String getAuthority() {
-        // TODO Auto-generated method stub
         return this.authority;
     }
 
+    //gett- och setter
     public void setAuthority(String authority){
         this.authority = authority;
     }

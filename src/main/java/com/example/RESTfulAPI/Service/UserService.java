@@ -36,25 +36,46 @@ public class UserService implements UserDetailsService {
         return userRepository.save(user);
     }
 
+    // uppdatera användare baserat på id
     public ApplicationUser updateUser(Long id, ApplicationUser updatedUser){
 
+        // Hämta den befintliga användaren från databasen baserat på ID
         Optional<ApplicationUser> existingUser = userRepository.findById(id);
+
+        // Om användaren finns, uppdatera dess attribut och spara i databasen
         return existingUser.map(user -> {
             user.setUsername(updatedUser.getUsername());
             user.setPassword(updatedUser.getPassword());
 
             return userRepository.save(user);
-        }).orElse(null);
-    }
-    public void deleteUser(Long id){
-        userRepository.deleteById(id);
+        }).orElse(null); // Returnera null om användaren inte finns
     }
 
+
+    // En metod för att radera en användare baserat på ID
+    public boolean deleteUser(Long id){
+
+        // Kontrollera om användaren med det angivna ID:t finns i databasen
+        Optional<ApplicationUser> userOptional = userRepository.findById(id);
+
+        // Om användaren finns, radera den och returnera true
+        if (userOptional.isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        } else {
+            // Om användaren inte finns, returnera false
+            return false;
+        }
+    }
+
+
+    // Överskuggad metod från UserDetailsService för att hämta användaruppgifter baserat på användarnamn
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         System.out.println("In the user details service");
 
+        // Sök efter användaren i databasen baserat på användarnamn, Kasta undantag om användaren inte hittas
         return userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("user is not valid"));
     }
 }

@@ -53,11 +53,11 @@ public class AdminController {
             if (deleted) {
                 return ResponseEntity.ok(String.format("Användaren med ID %d har raderats.", id));
             } else {
-                // Om användaren inte hittades, returnera HTTP 404 Not Found
+                // Om användaren inte hittades, returnera meddelande
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("Användaren med ID %d finns inte.", id));
             }
         } catch (Exception e) {
-            // Om det uppstår ett fel, returnera felmeddelande och HTTP 500 Internal Server Error
+            // Om det uppstår ett fel, returnera felmeddelande
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
     }

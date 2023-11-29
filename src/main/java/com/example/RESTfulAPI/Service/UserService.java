@@ -1,6 +1,7 @@
 package com.example.RESTfulAPI.Service;
 
 import com.example.RESTfulAPI.Entity.ApplicationUser;
+import com.example.RESTfulAPI.Entity.Book;
 import com.example.RESTfulAPI.Repository.BookRepository;
 import com.example.RESTfulAPI.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -72,7 +73,38 @@ public class UserService implements UserDetailsService {
         }
     }
 
+    // Lägg till en bok kopplad till en användare
+    public Book addBook(Book book, String username){
+        // hämta användaren baserat på användarnamn
+        Optional <ApplicationUser> user = userRepository.findByUsername(username);
+        // om användaren finns, koppla boken till användaren och spara i db
+        if (user.isPresent()){
+            book.setUser(user.get());
+            return bookRepository.save(book);
+        }
+        // om användaren inte finns returnera null
+        else return null;
+    }
 
+    // raderar en bok baserat på id
+    public void deleteBook(Long id){
+        bookRepository.deleteById(id);
+    }
+
+    // hämtar en bok baserat på id
+    public Optional <Book> getOneById(Long id){
+        return bookRepository.findById(id);
+    }
+
+    // hämtar alla böcker
+    public List<Book> gettAll(){
+        return bookRepository.findAll();
+    }
+
+    // uppdaterar en författare på en befintlig bok
+    public Book updateAuthor(Book book){
+        return bookRepository.save(book);
+    }
     // Överskuggad metod från UserDetailsService för att hämta användaruppgifter baserat på användarnamn
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

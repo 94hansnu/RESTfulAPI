@@ -67,8 +67,8 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/auth/**").permitAll();
                     // Kräver ADMIN-roll för förfrågningar till /admin/**
                     auth.requestMatchers("/admin/**").hasRole("ADMIN");
-                    // Kräver antingen ADMIN- eller USER-roll för förfrågningar till /user/**
-                    auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
+                    // Kräver antingen ADMIN- eller USER-roll
+                    auth.requestMatchers("/user/**", "book/**").hasAnyRole("ADMIN", "USER");
                     // Kräver autentisering för övriga förfrågningar
                     auth.anyRequest().authenticated();
                 });

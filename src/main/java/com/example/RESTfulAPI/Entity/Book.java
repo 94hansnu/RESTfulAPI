@@ -1,7 +1,7 @@
 package com.example.RESTfulAPI.Entity;
 
 import jakarta.persistence.*;
-import org.springframework.security.core.userdetails.User;
+
 
 @Entity
 public class Book {
@@ -14,7 +14,7 @@ public class Book {
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "user_id")
-    private User user;
+    private ApplicationUser user;
 
     public Book(String title, String author) {
         this.title = title;
@@ -48,11 +48,11 @@ public class Book {
         this.title = title;
     }
 
-    public User getUser() {
+    public ApplicationUser getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(ApplicationUser user) {
         this.user = user;
     }
 }

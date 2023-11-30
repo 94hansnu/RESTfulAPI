@@ -26,49 +26,87 @@
 ##### To test the API with Postman, use the following link to download postman https://www.postman.com/downloads/
 
 ##### API Endpoints
-##### Admin Controller:
-* Endpoint : '/admin'
-  * Method: 'GET'
-  * Description: Returns "Admin level access."
-* Endpoint : '/admin/{id}'
-  * Method: 'PUT'
-  * Description: Updates a user with the specified ID
+
 ##### Authentication Controller:
 * Endpoint : '/auth/register'
   * Method: 'POST'
+  * Postman: 
+    * Type: JSON
   * Description: Registers a new user
 * Endpoint : '/auth/login'
   * Method: 'POST'
+  * Postman: 
+    * Type: JSON
   * Description: Logs in a user
+
+##### Admin Controller:
+* Endpoint : '/admin'
+  * Method: 'GET'
+  * Postman: 
+    * Authorization:  Bearer Token 
+  * Description: Returns "Admin level access."
+* Endpoint : '/admin/{id}'
+  * Method: 'PUT'
+  * Postman: 
+    * Authorization:  Bearer Token 
+    * Type: JSON
+  * Description: Updates a user with the specified ID
+* Endpoint : '/admin/{id}'
+  * Method: 'DELETE'
+  * Postman: 
+    * Authorization:  Bearer Token
+  * Description: Deletes a user with the specified ID
+
 ##### Book Controller:
 * Endpoint : '/book'
   * Method: 'POST'
+  * Postman: 
+    * Authorization:  Bearer Token
+    * Type: JSON
   * Description: Adds a new book
 * Endpoint : '/book/{id}'
   * Method: 'DELETE'
+  * Postman:
+    * Authorization:  Bearer Token
   * Description: Deletes a book with the specified ID
 * Endpoint : '/book
   * Method: 'GET'
+  * Postman: 
+    * Authorization:  Bearer Token
   * Description: Returns a list of all books
 * Endpoint : '/book/{id}
   * Method: 'GET'
+  * Postman: 
+    * Authorization:  Bearer Token
   * Description: Returns information about a specific book
 * Endpoint : '/book/{id}
   * Method: 'PUT'
+  * Postman:
+    * Authorization:  Bearer Token
+    * Type: JSON
   * Description: Updates the author of a book with the specified ID
 
 ##### User Controller
 * Endpoint : '/user'
   * Method: 'GET'
+  * Postman: 
+    * Authorization:  Bearer Token
   * Description: Returns "User access level."
 * Endpoint : '/user'
   * Method: 'GET'
+  * Postman: 
+    * Authorization:  Bearer Token
   * Description: Returns a list of all users
 * Endpoint : '/user/{id}'
   * Method: 'GET'
+  * Postman:
+    * Authorization:  Bearer Token
   * Description: Returns information about a user with the specified ID
 * Endpoint : '/user'
   * Method: 'POST'
+  * Postman: 
+    * Authorization:  Bearer Token
+    * Type: JSON
   * Description: Creates a new user
 
 ### Security Configuration

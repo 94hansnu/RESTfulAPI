@@ -57,29 +57,12 @@
     * Authorization:  Bearer Token
   * Description: Deletes a user with the specified ID
 
-##### Book Controller:
-* Endpoint : '/book'
-  * Method: 'POST'
-  * Postman: 
-    * Authorization:  Bearer Token
-    * Type: JSON
-  * Description: Adds a new book
-* Endpoint : '/book/{id}'
+* Endpoint : '/admin/book/{id}'
   * Method: 'DELETE'
   * Postman:
     * Authorization:  Bearer Token
   * Description: Deletes a book with the specified ID
-* Endpoint : '/book
-  * Method: 'GET'
-  * Postman: 
-    * Authorization:  Bearer Token
-  * Description: Returns a list of all books
-* Endpoint : '/book/{id}
-  * Method: 'GET'
-  * Postman: 
-    * Authorization:  Bearer Token
-  * Description: Returns information about a specific book
-* Endpoint : '/book/{id}
+* Endpoint : '/admin/book/{id}
   * Method: 'PUT'
   * Postman:
     * Authorization:  Bearer Token
@@ -109,6 +92,23 @@
     * Type: JSON
   * Description: Creates a new user
 
+* Endpoint : '/user/book'
+  * Method: 'POST'
+  * Postman:
+    * Authorization:  Bearer Token
+    * Type: JSON
+  * Description: Adds a new book
+
+* Endpoint : '/user/book
+  * Method: 'GET'
+  * Postman:
+    * Authorization:  Bearer Token
+  * Description: Returns a list of all books
+* Endpoint : '/user/book/{id}
+  * Method: 'GET'
+  * Postman:
+    * Authorization:  Bearer Token
+  * Description: Returns information about a specific book
 ### Security Configuration
 ##### The project includes security features such as role-based access control, configuration of OAuth2 resource server, and JWT token management. The 'SecurityConfiguration' class contains the necessary configurations.
 ### Additional Information

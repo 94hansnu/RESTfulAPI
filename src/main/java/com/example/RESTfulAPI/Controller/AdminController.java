@@ -1,6 +1,7 @@
 package com.example.RESTfulAPI.Controller;
 
 import com.example.RESTfulAPI.Entity.ApplicationUser;
+import com.example.RESTfulAPI.Entity.Book;
 import com.example.RESTfulAPI.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ public class AdminController {
     // Autowired används för att injicera en instans av UserService
     @Autowired
     private UserService userService;
+
 
     // En GET-metod som svarar på förfrågningar till "/admin/"
     @GetMapping("/")
@@ -60,5 +62,26 @@ public class AdminController {
             // Om det uppstår ett fel, returnera felmeddelande
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error: " + e.getMessage());
         }
+    }
+
+    // delete metod för att radera en bok baserat på id
+    @DeleteMapping("/book/{id}")
+    public ResponseEntity<String> deleteBook(@PathVariable Long id){
+        Optional <Book> deleteBook = userService.getOneById(id);
+        if (deleteBook.isPresent()){
+            userService.deleteBook(id);
+            return new ResponseEntity<>("Bok raderad", HttpStatus.OK);
+        } return new ResponseEntity<>("Bok ej hittad", HttpStatus.BAD_REQUEST);
+    }
+
+    // put metod för att uppdatera författare på en befintlig bok baserat på id
+    @PutMapping("/book/{id}")
+    public ResponseEntity <Book> updateAuthor(@PathVariable Long id, @RequestBody String author){
+        Optional <Book> updateBook = userService.getOneById(id);
+        if (updateBook.isPresent()){
+            updateBook.get().setAuthor(author);
+            Book updated = userService.updateAuthor(updateBook.get());
+            return new ResponseEntity<>(updated, HttpStatus.OK);
+        } else return ResponseEntity.notFound().build();
     }
 }
